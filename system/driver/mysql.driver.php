@@ -28,7 +28,7 @@
 		 	return $res;
 		 }
 		 
-		 function $where($where_conditions)
+		 function &where($where_conditions, $delimer = 'AND')
 		 {
 		 	$where_pairs = array(); where_delimer = '=';
 		 	if(is_array($where_conditions):
@@ -42,10 +42,11 @@
 		 			endif;
 		 			$where_pairs[] = '`' . $key . "` " . $where_delimer . " '" . mysql_real_escape_string($value) . "'";
 		 		endforeach;
-		 		$where_string = 'WHERE ' . implode(' AND ', $where_pairs);
+		 		$where_string = 'WHERE ' . implode(' ' . $delimer . ' ', $where_pairs);
 		 	else:
 		 		log_error('Ошибка при формировании запроса WHERE. Ожидается массив данных.');
 		 	endif;
+		 	return $this;
 		 }
 		 
 		 function get($table_name)
