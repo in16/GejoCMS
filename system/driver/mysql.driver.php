@@ -46,7 +46,12 @@
 		 	else:
 		 		log_error('Ошибка при формировании запроса WHERE. Ожидается массив данных.');
 		 	endif;
-		 	return $this;
+		 	return &$this;
+		 }
+		 
+		 function &where_or($where_conditions)
+		 {
+		 	return &where($where_conditions, 'OR');
 		 }
 		 
 		 function get($table_name)
